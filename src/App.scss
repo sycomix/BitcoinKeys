@@ -1,0 +1,116 @@
+$basicColor: #d8d8d8;
+$secondColor: #f2f2f2;
+$colorText: black;
+$colorLink: #17A2B8;
+$colorLinkHover: rgb(13, 97, 110);
+
+
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+    background-color: $basicColor;
+ }
+
+ .backgroundColorBody{
+  background-color: $secondColor;
+ }
+
+ .tableStyle {
+    width:90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.floatLeft{
+    float: left;
+}
+
+.loginTextTitle{
+    color: $colorLink;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.titleModalRegist{
+    font-size: 20px;
+}
+
+.buttonSubmit{
+    margin-top: 30px !important;
+}
+
+.resetPassword{
+   font-size: 16px;
+   padding-top: 10px;
+   cursor: pointer;
+   color: $colorLink;
+}
+
+.resetPassword:hover{
+    cursor: pointer;
+    color: $colorLinkHover;
+ }
+
+ .email{
+     margin-top: 6px;
+     cursor: default !important;
+ }
+
+ .logo{
+     margin-top: 6px;
+     color: $colorText !important;
+ }
+
+ .navbar{
+     background-image: none !important;
+     background-color: $basicColor !important;
+     border: none !important;
+     border-radius: 0px !important;
+     margin-bottom: 0px !important;
+     position: static !important;
+ }
+
+ .header{
+     background: linear-gradient($basicColor, $secondColor)
+ }
+
+ .headerLogoText{
+     padding-bottom: 20px;
+     padding-top: 20px;
+     font-size: 60px;
+ }
+
+ .headerText{
+     margin-left:auto; 
+     margin-right: auto;
+     width: 80%;
+     font-size: 17px;
+     padding-bottom: 40px;
+ }
+
+ .error{
+     background-color: $secondColor;
+ }
+
+.footer{
+    background-color: $basicColor;
+}
+
+.footerTextUp{
+    padding-top: 30px;
+    font-size: 16px;
+}
+
+.footerTextDown{
+    margin-bottom: 0px;
+    padding-bottom: 30px;
+    font-size: 16px;
+}
+
+.pager{
+    padding-bottom: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+.prevNextStyleDown{
+   padding-bottom: 20px;
+}
+
