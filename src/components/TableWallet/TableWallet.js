@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {Pager} from 'react-bootstrap'
+import {Pager, Label, Button} from 'react-bootstrap'
 import {connect} from 'react-redux'
+import update from 'immutability-helper'; 
 
 import axios from 'axios';
 
@@ -10,9 +11,27 @@ class TableWalletComponent extends Component {
     super(props);
     this.state = {
       dataOfWallet: [],
-      id: 1
+      id: 1,
     };
+
+    axios.get("https://bitcoin-keys.appspot.com/" + this.state.id)
+    .then(data => { 
+      let keysData = []
+      data.data.forEach(element => {
+       keysData.Private = element.Private;
+       keysData.Compressed = element.Compressed;
+       keysData.Uncompressed = element.Uncompressed;
+       keysData.UncompressedUSD = "-";
+       keysData.CompressedUSD = "-"
+       keysData.push(keysData)
+      });
+      this.setState({dataOfWallet: keysData})
+     })
+     .catch((error)=>{
+           this.props.changeServerStatus(error)
+     })
   }
+
 
 componentWillMount(){
     if(this.props.match.params.id === undefined){
@@ -22,21 +41,37 @@ componentWillMount(){
    }
   }
 
+  getDataApi = (param , index, nameOfValue)=> {
+    axios.get("https://cors-anywhere.herokuapp.com/https://blockchain.info/rawaddr/"+ param)
+    .then(data => { 
+       this.setState({
+         dataOfWallet: update(this.state.dataOfWallet, {[index]: {[nameOfValue]: {$set: data.data.final_balance}}})
+      })
+    })
+     .catch((error)=>{
+           console.log(error)
+     })
+  }
+
 
   render() {
-    axios.get("https://bitcoin-keys.appspot.com/" + this.state.id)
-   .then(data => { 
-     this.setState({dataOfWallet: data.data})
-    })
-    .catch((error)=>{
-          this.props.changeServerStatus(error)
-    })
-
-   const listData = this.state.dataOfWallet.map((data)=>
-            <tr key={data.Number}>
-              <th className="text-center">{data.Private}</th>
-              <th className="text-center"><a href={"https://www.blockchain.com/ru/btc/address/" + data.Compressed} target="_blank">{data.Compressed}</a></th>
-              <th className="text-center"><a href={"https://www.blockchain.com/ru/btc/address/" + data.Uncompressed} target="_blank">{data.Uncompressed}</a></th>
+   const listData = this.state.dataOfWallet.map((data, i)=>
+            <tr key={i}>
+              <th className="text-center tableText sizeRow">{data.Private}</th>
+              <th className="text-center sizeRow" 
+                  onClick={()=>this.getDataApi(data.Compressed, i, "CompressedUSD")}>
+                  <Label bsClass='colorHover'>{data.Compressed}</Label>
+              </th>
+              <th className="text-center tableText sizeRow">
+                <Label>{data.CompressedUSD}</Label>
+              </th>
+              <th className="text-center sizeRow" 
+                  onClick={()=>this.getDataApi(data.Uncompressed, i, "UncompressedUSD")}>
+                  <Label bsClass='colorHover'>{data.Uncompressed}</Label>
+              </th>
+              <th className="text-center tableText sizeRow">
+              <Label>{data.UncompressedUSD}</Label>
+              </th>
             </tr>  
    )
     return (
@@ -45,7 +80,7 @@ componentWillMount(){
       <div className="">
         <p>Page {this.state.id} of 1809251394333065553493296640760748560200586941860545380978205674086221273350</p>
       </div>  
-     <div className="text-right prevNextStyle">
+     <div className="prevNextStyle">
      <Pager>
        <Pager.Item 
          previous 
@@ -53,6 +88,7 @@ componentWillMount(){
          disabled={Number(this.state.id) === 1}>
           &larr; Previous
        </Pager.Item>
+       <Button bsStyle="info" href={"/" + Math.floor(Math.random() * 100000000000000000000) + 1}>Random</Button>
        <Pager.Item 
          next
          href={"/" + Number(Number(this.state.id) + 1)}>
@@ -65,7 +101,9 @@ componentWillMount(){
           <tr>
             <th className="text-center">Private Key</th>
             <th className="text-center">Compressed</th>
+            <th className="text-center">USD</th>
             <th className="text-center">Uncompressed</th>
+            <th className="text-center">USD</th>
           </tr>  
           </thead>
           <tbody>
