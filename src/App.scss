@@ -137,11 +137,47 @@ $colorLinkHover: rgb(13, 97, 110);
     background-color: rgb(100, 100, 100);
 }
 
+.waiting{
+    font-weight: 400;
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+    background-color: rgb(100, 100, 100);
+}
+
+.sussessFind{
+    font-weight: 400;
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+    background-color: rgb(77, 174, 74);
+}
+
+.faildFind{
+    font-weight: 400;
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+    background-color: rgb(236, 70, 73);
+}
+
 .colorHover:hover{
     background-color: rgb(43, 158, 202);
 }
 
 .prevNextStyle{
     padding-bottom: 20px;
+}
+
+.click{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 90px;
+    margin-bottom: 0px;
+}
+
+.clickText{
+    padding-left: 5px;
+    font-size: 30px;
 }
 

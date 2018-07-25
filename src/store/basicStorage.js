@@ -2,6 +2,7 @@ const initialState = {
     statusError: 'false',
     registModal: false,
     userAuth: null,
+    click: 0,
 }
 
 const basicStorage = (state = initialState, action) => {
@@ -27,6 +28,12 @@ const basicStorage = (state = initialState, action) => {
         return{
             ...state,
             userAuth: action.userAuth
+        }
+    };
+    if(action.type === 'CLICK_PLUS'){
+        return{
+            ...state,
+            click: action.click
         }
     };
     return state;

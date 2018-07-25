@@ -105,8 +105,39 @@
   border-radius: 3px;
   background-color: #646464; }
 
+.waiting {
+  font-weight: 400;
+  color: white;
+  padding: 5px;
+  border-radius: 3px;
+  background-color: #646464; }
+
+.sussessFind {
+  font-weight: 400;
+  color: white;
+  padding: 5px;
+  border-radius: 3px;
+  background-color: #4dae4a; }
+
+.faildFind {
+  font-weight: 400;
+  color: white;
+  padding: 5px;
+  border-radius: 3px;
+  background-color: #ec4649; }
+
 .colorHover:hover {
   background-color: #2b9eca; }
 
 .prevNextStyle {
   padding-bottom: 20px; }
+
+.click {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 90px;
+  margin-bottom: 0px; }
+
+.clickText {
+  padding-left: 5px;
+  font-size: 30px; }

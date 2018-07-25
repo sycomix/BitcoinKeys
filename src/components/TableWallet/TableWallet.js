@@ -12,6 +12,7 @@ class TableWalletComponent extends Component {
     this.state = {
       dataOfWallet: [],
       id: 1,
+      clicked: 0
     };
 
     axios.get("https://bitcoin-keys.appspot.com/" + this.state.id)
@@ -47,10 +48,31 @@ componentWillMount(){
        this.setState({
          dataOfWallet: update(this.state.dataOfWallet, {[index]: {[nameOfValue]: {$set: data.data.final_balance}}})
       })
+      if(this.props.userAuth !== null){
+        let click = this.props.click + 1;
+        this.props.clickPlus(click);
+      }else {
+        let clickedPlus = this.state.clicked + 1;
+        this.setState({clicked: clickedPlus});
+        if(this.state.clicked === 5){
+         this.props.openRegistModal();
+         this.setState({clicked: 0})
+        }
+      }
     })
      .catch((error)=>{
            console.log(error)
      })
+  }
+
+  styleForPrise(data){
+  if(data === '-'){
+    return 'waiting';
+  }else if(data > 0){
+    return 'sussessFind';
+  }else if(data <= 0){
+    return 'faildFind';
+  }
   }
 
 
@@ -63,14 +85,14 @@ componentWillMount(){
                   <Label bsClass='colorHover'>{data.Compressed}</Label>
               </th>
               <th className="text-center tableText sizeRow">
-                <Label>{data.CompressedUSD}</Label>
+                <Label bsClass={this.styleForPrise(data.CompressedUSD)}>{data.CompressedUSD}</Label>
               </th>
               <th className="text-center sizeRow" 
                   onClick={()=>this.getDataApi(data.Uncompressed, i, "UncompressedUSD")}>
                   <Label bsClass='colorHover'>{data.Uncompressed}</Label>
               </th>
               <th className="text-center tableText sizeRow">
-              <Label>{data.UncompressedUSD}</Label>
+              <Label bsClass={this.styleForPrise(data.UncompressedUSD)}>{data.UncompressedUSD}</Label>
               </th>
             </tr>  
    )
@@ -133,7 +155,9 @@ componentWillMount(){
 
 const mapStateToProps = state => {
   return {
-      statusCode: state.basic.statusError
+      statusCode: state.basic.statusError,
+      userAuth: state.basic.userAuth,
+      click: state.basic.click
   }
 }
 
@@ -142,6 +166,14 @@ const mapDispatchToProps  = dispatch => {
    changeServerStatus: (event) => dispatch({
       type: "CHANGE_SERVER_ERROR",
       statusMessage: event
+    }),
+    openRegistModal: () => dispatch({
+      type: "OPEN_MODAL_REGIST",
+      registModal: true
+    }),
+    clickPlus: (data) => dispatch({
+      type: "CLICK_PLUS",
+      click: data
     }),
   }
 }
