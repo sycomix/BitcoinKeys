@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import { Pager, Label, Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import update from 'immutability-helper';
+import { db } from '../../firebase';
+import _ from 'lodash';
 
 import axios from 'axios';
+
 
 
 class TableWalletComponent extends Component {
@@ -12,25 +15,40 @@ class TableWalletComponent extends Component {
     this.state = {
       dataOfWallet: [],
       id: 1,
-      countForRegist: 5
+      countForRegist: 5,
+      walletData: []
     };
 
     axios.get("https://bitcoin-keys.appspot.com/" + this.state.id)
       .then(data => {
-        let keysData = []
         data.data.forEach(element => {
-          keysData.Private = element.Private;
-          keysData.Compressed = element.Compressed;
-          keysData.Uncompressed = element.Uncompressed;
-          keysData.UncompressedUSD = "-";
-          keysData.CompressedUSD = "-"
-          keysData.push(keysData)
+          element.UncompressedUSD = "?";
+          element.CompressedUSD = "?";
         });
-        this.setState({ dataOfWallet: keysData })
+          this.setState({ dataOfWallet: data.data });
+          this.getWalletDataFromDB()
       })
       .catch((error) => {
         this.props.changeServerStatus(error)
       })
+  }
+
+  componentDidUpdate(prevProps){
+    if (this.props.userAuth !== prevProps.userAuth) {
+      this.getWalletDataFromDB();
+    }
+  }
+
+  getWalletDataFromDB(){
+    if(this.props.userAuth !== null){
+      let uid = this.props.userAuth.uid
+      let page = this.state.id
+      let dataFromDB = db.getWalletData(uid, page)
+      dataFromDB.on('value', snapshot => {
+        this.setState({walletData: snapshot.val()})
+      });
+
+    }
   }
 
 
@@ -38,8 +56,8 @@ class TableWalletComponent extends Component {
     if (this.props.match.params.id === undefined) {
       this.setState({ id: 1 })
     } else {
-      this.setState({ id: this.props.match.params.id })
-    }
+      this.setState({ id: this.props.match.params.id });
+    };
   }
 
   getDataApi = (param, index, nameOfValue) => {
@@ -49,10 +67,19 @@ class TableWalletComponent extends Component {
           dataOfWallet: update(this.state.dataOfWallet, { [index]: { [nameOfValue]: { $set: data.data.final_balance } } })
         })
         this.clickCalculation();
+        this.setDataToDB(param);
+        this.transactionCalcularion(data.data)
       })
       .catch((error) => {
         console.log(error)
       })
+  }
+
+  transactionCalcularion(data){
+    if(data.n_tx > 0){
+      let transaction = this.props.transaction + 1;
+      this.props.transactionPlus(transaction);
+    }
   }
 
   clickCalculation() {
@@ -70,8 +97,19 @@ class TableWalletComponent extends Component {
     }
   }
 
+  setDataToDB(param){
+    if(this.props.userAuth !== null){
+      let d = _.findKey(this.state.walletData, function(o) { return o.walletId === param; });
+      if(d === undefined){
+        let uid = this.props.userAuth.uid
+        let page = this.state.id
+        db.setWalletData(uid, page, param)
+      }
+    }
+  }
+
   styleForPrise(data) {
-    if (data === '-') {
+    if (data === '?') {
       return 'waiting';
     } else if (data > 0) {
       return 'sussessFind';
@@ -80,21 +118,34 @@ class TableWalletComponent extends Component {
     }
   }
 
+  styleForWallet(data){
+    let d = _.findKey(this.state.walletData, function(o) { return o.walletId === data; });
+    if(d === undefined){
+      return 'colorHover'
+    }else{
+      return 'walletFind'
+    }
+  }
+
 
   render() {
+//    var BigNumber = require('big-number');
+
+//var x = new BigNumber(this.state.id, 10);
+
     const listData = this.state.dataOfWallet.map((data, i) =>
       <tr key={i}>
         <th className="text-center tableText sizeRow">{data.Private}</th>
         <th className="text-center sizeRow"
           onClick={() => this.getDataApi(data.Compressed, i, "CompressedUSD")}>
-          <Label bsClass='colorHover'>{data.Compressed}</Label>
+          <Label bsClass={this.styleForWallet(data.Compressed)}>{data.Compressed}</Label>
         </th>
         <th className="text-center tableText sizeRow">
           <Label bsClass={this.styleForPrise(data.CompressedUSD)}>{data.CompressedUSD}</Label>
         </th>
         <th className="text-center sizeRow"
           onClick={() => this.getDataApi(data.Uncompressed, i, "UncompressedUSD")}>
-          <Label bsClass='colorHover'>{data.Uncompressed}</Label>
+          <Label bsClass={this.styleForWallet(data.Uncompressed)}>{data.Uncompressed}</Label>
         </th>
         <th className="text-center tableText sizeRow">
           <Label bsClass={this.styleForPrise(data.UncompressedUSD)}>{data.UncompressedUSD}</Label>
@@ -105,20 +156,21 @@ class TableWalletComponent extends Component {
       <div className="backgroundColorBody">
         <div className="tableStyle">
           <div className="">
-            <p>Page {this.state.id} of 1809251394333065553493296640760748560200586941860545380978205674086221273350</p>
+            <p>Page {this.state.id} of 2315841784746323908471419700173758157056751285581498087652103262830363229887</p>
           </div>
           <div className="prevNextStyle">
             <Pager>
               <Pager.Item
                 previous
-                href={"/" + Number(Number(this.state.id) - 1)}
-                disabled={Number(this.state.id) === 1}>
+                href={"/" + (Number(this.state.id) - 1)}
+                disabled={this.state.id === 1}
+               >
                 &larr; Previous
        </Pager.Item>
               <Button bsStyle="info" href={"/" + Math.floor(Math.random() * 100000000000000000000) + 1}>Random</Button>
               <Pager.Item
                 next
-                href={"/" + Number(Number(this.state.id) + 1)}>
+                href={"/" + (Number(this.state.id) + 1)}>
                 Next &rarr;
         </Pager.Item>
             </Pager>
@@ -127,10 +179,10 @@ class TableWalletComponent extends Component {
             <thead>
               <tr>
                 <th className="text-center">Private Key</th>
-                <th className="text-center">Compressed</th>
-                <th className="text-center">USD</th>
-                <th className="text-center">Uncompressed</th>
-                <th className="text-center">USD</th>
+                <th className="text-center">Compressed Key</th>
+                <th className="text-center">BTC</th>
+                <th className="text-center">Uncompressed Key</th>
+                <th className="text-center">BTC</th>
               </tr>
             </thead>
             <tbody>
@@ -141,13 +193,15 @@ class TableWalletComponent extends Component {
             <Pager>
               <Pager.Item
                 previous
-                href={"/" + Number(Number(this.state.id) - 1)}
-                disabled={Number(this.state.id) === 1}>
+                href={"/" + (Number(this.state.id) - 1)}
+                disabled={this.state.id === 1}
+              >
                 &larr; Previous
        </Pager.Item>
               <Pager.Item
                 next
-                href={"/" + Number(Number(this.state.id) + 1)}>
+                href={"/" + (Number(this.state.id) + 1)}
+           >
                 Next &rarr;
         </Pager.Item>
             </Pager>
@@ -162,7 +216,8 @@ const mapStateToProps = state => {
   return {
     statusCode: state.basic.statusError,
     userAuth: state.basic.userAuth,
-    click: state.basic.click
+    click: state.basic.click,
+    transaction: state.basic.transaction
   }
 }
 
@@ -179,6 +234,10 @@ const mapDispatchToProps = dispatch => {
     clickPlus: (data) => dispatch({
       type: "CLICK_PLUS",
       click: data
+    }),
+    transactionPlus: (data) => dispatch({
+      type: "TRANSACTION_PLUS",
+      transaction: data
     }),
   }
 }

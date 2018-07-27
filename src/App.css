@@ -38,7 +38,9 @@
   cursor: default !important; }
 
 .logo {
-  margin-top: 6px;
+  position: relative;
+  top: 12px;
+  left: 10px;
   color: black !important; }
 
 .navbar {
@@ -52,17 +54,10 @@
 .header {
   background: linear-gradient(#d8d8d8, #f2f2f2); }
 
-.headerLogoText {
-  padding-bottom: 20px;
-  padding-top: 20px;
-  font-size: 60px; }
-
-.headerText {
-  margin-left: auto;
-  margin-right: auto;
-  width: 80%;
-  font-size: 17px;
-  padding-bottom: 40px; }
+.registText {
+  font-size: 18px;
+  font-weight: 600;
+  padding-bottom: 30px; }
 
 .error {
   background-color: #f2f2f2; }
@@ -71,12 +66,13 @@
   background-color: #d8d8d8; }
 
 .footerTextUp {
-  padding-top: 30px;
+  padding-top: 40px;
+  margin-bottom: 0px;
   font-size: 16px; }
 
 .footerTextDown {
   margin-bottom: 0px;
-  padding-bottom: 30px;
+  padding-bottom: 40px;
   font-size: 16px; }
 
 .pager {
@@ -134,10 +130,25 @@
 
 .click {
   padding-top: 20px;
-  padding-bottom: 20px;
   font-size: 90px;
   margin-bottom: 0px; }
 
 .clickText {
   padding-left: 5px;
   font-size: 30px; }
+
+.transaction {
+  padding-left: 20px; }
+
+.walletFind {
+  cursor: pointer;
+  font-weight: 400;
+  color: white;
+  padding: 3px;
+  border-radius: 3px;
+  background-color: #db933a; }
+
+.logoImg {
+  width: 50px;
+  height: 50px;
+  float: left; }

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Grid, Row} from 'react-bootstrap';
+import { Grid, Row } from 'react-bootstrap';
+import { connect } from 'react-redux'
 
 class HeaderComponen extends Component{
     render(){
@@ -7,11 +8,13 @@ class HeaderComponen extends Component{
             <div className='header'>
             <Grid>
            <Row className="show-grid">
-                <p className="text-center headerLogoText">Bitcoin Keys</p>
-                <p className="headerText text-center"> Some powerful text for describe all features about this webpage. 
-                    Some powerful text for describe all features about this webpage. 
-                    Some powerful text for describe all features about this webpage. 
-                    Some powerful text for describe all features about this webpage.</p> 
+           <p className="click text-center">
+           {this.props.click}
+           <span className='clickText'>click</span>
+           <span className='transaction'>{this.props.transaction}</span>
+           <span className='clickText'>transaction</span></p>
+           <p className="text-center">text for achievement</p>
+           {this.props.userAuth === null &&<p className="text-center registText">(For saving your result, regist please!)</p>}
            </Row>     
              </Grid>
            </div>
@@ -19,4 +22,12 @@ class HeaderComponen extends Component{
     }
 } 
 
-export default HeaderComponen;
+const mapStateToProps = state => {
+    return {
+        click: state.basic.click,
+        transaction: state.basic.transaction,
+        userAuth: state.basic.userAuth,
+    }
+  }
+
+export default connect(mapStateToProps) (HeaderComponen);

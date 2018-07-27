@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Navbar, Button, Nav, NavItem } from 'react-bootstrap';
 import { connect } from 'react-redux'
 import { auth } from '../../firebase'
+import logo from '../../assets/logo.png';
 import '../../App.css'
 
 class NavbarComponen extends Component {
@@ -10,7 +11,7 @@ class NavbarComponen extends Component {
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
-            <a className="logo" href="/">Bitcoin Keys</a>
+           <img alt="logo" src={logo} className="logoImg"/><a className="logo" href="/">Bitcoin Keys</a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>

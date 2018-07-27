@@ -9,7 +9,6 @@ import FooterComponent from './components/Footer/Footer';
 import NavbarComponent from './components/Navbar/Navbar';
 import HeaderComponent from './components/Header/Header';
 import ErrorServerComponent from './components/ErrorServer/ErrorServer';
-import ClickComponent from './components/Click/Click';
 import RegModal from './components/RegModal/RegModal';
 
 
@@ -28,8 +27,7 @@ class App extends Component {
     return (
     <div>          
       <NavbarComponent/>
-      {this.props.userAuth === null && <HeaderComponent/>}
-      {this.props.userAuth !== null && <ClickComponent/>}
+      <HeaderComponent/>
       <RegModal/>
       <Router>
      <div>   
