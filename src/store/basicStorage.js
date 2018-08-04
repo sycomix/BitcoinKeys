@@ -3,7 +3,7 @@ const initialState = {
     registModal: false,
     userAuth: null,
     click: 0,
-    transaction: 0
+    transaction: 0,
 }
 
 const basicStorage = (state = initialState, action) => {

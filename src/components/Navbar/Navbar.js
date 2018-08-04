@@ -11,19 +11,31 @@ class NavbarComponen extends Component {
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
-           <img alt="logo" src={logo} className="logoImg"/><a className="logo" href="/">Bitcoin Keys</a>
+           <a style={{whiteSpace: "nowrap"}} href="/"><img alt="logo" src={logo} className="logoImg"/><p className="logo">Bitcoin Keys</p></a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
           {this.props.userAuth === null && 
           <Nav pullRight>
+            <NavItem href="/usedAddresses" className="usedAdressMobile">
+            USED ADDRESSES
+            </NavItem>
+            <NavItem href="/faq" className="faqMobile">
+              FAQ
+            </NavItem>
           <NavItem >
             <Button bsStyle="info" onClick={this.props.openRegistModal}>Login / SignUp</Button>
             </NavItem >
           </Nav>}
           {this.props.userAuth !== null && 
           <Nav pullRight>
+            <NavItem href="/usedAddresses" className="usedAdressMobile">
+            USED ADDRESSES
+            </NavItem>
+            <NavItem href="/faq" className="faqMobile">
+              FAQ
+            </NavItem>
             <NavItem className="email">
               {this.props.userAuth.email}
             </NavItem>

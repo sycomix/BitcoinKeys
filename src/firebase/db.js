@@ -1,6 +1,5 @@
 import { db } from './firebase';
 
-// User API
 
 export const doCreateUser = (id, email, password) =>
   db.ref(`users/${id}`).set({
@@ -20,12 +19,19 @@ export const setUsersClick = (id, click, transaction) =>
   export const getUsersClick = (id) =>
   db.ref(`clickData/${id}`)
 
-  export const setWalletData = (id, page, walletId) =>
+  export const setWalletData = (id, page, walletId, value) =>
   db.ref(`walletData/${id}/${page}`).push({
     walletId,
+    value
   });
 
   export const getWalletData = (id, page) =>
   db.ref(`walletData/${id}/${page}`)
 
-// Other db APIs ...
+  export const setPages = (id, page) =>
+  db.ref(`pages/${id}`).push({
+    page,
+  });
+
+  export const getPagesData = (id) =>
+  db.ref(`pages/${id}`)

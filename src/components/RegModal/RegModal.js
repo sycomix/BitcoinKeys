@@ -84,7 +84,7 @@ class RegModal extends Component {
 
     getValidationForEmail() {
         const data = this.state.email;
-        let reg = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
+        let reg = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
         if (reg.test(data) === true) {
             return 'success';
         } else if (reg.test(data) === false) {

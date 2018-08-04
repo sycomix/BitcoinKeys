@@ -3,6 +3,8 @@ $secondColor: #f2f2f2;
 $colorText: black;
 $colorLink: #17A2B8;
 $colorLinkHover: rgb(13, 97, 110);
+$labelHover: rgb(43, 158, 202);
+$labelWaiting: rgb(100, 100, 100);
 
 
 .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
@@ -13,10 +15,44 @@ $colorLinkHover: rgb(13, 97, 110);
   background-color: $secondColor;
  }
 
+ .stylingForFAQ{
+     font-size: 16px;
+ }
+
+ .textAdress{
+     padding-top: 40px;
+     font-size: 18px;
+ }
+
+ .styleQ{
+    font-size: 18px;
+ }
+
+ .paddingForFAQ{
+     padding-left: 23px;
+ }
+
  .tableStyle {
     width:90%;
     margin-left: auto;
     margin-right: auto;
+}
+
+.displayNone{
+    display: none;
+}
+
+.dispaly{
+    display: inline;
+    position: absolute;
+    background-color: $labelWaiting;
+    opacity: 0.9;
+    color: white;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-radius: 3px;
 }
 
 .floatLeft{
@@ -31,6 +67,10 @@ $colorLinkHover: rgb(13, 97, 110);
 
 .titleModalRegist{
     font-size: 20px;
+}
+
+.paddingNone{
+    margin-bottom: 0px !important;
 }
 
 .buttonSubmit{
@@ -78,6 +118,10 @@ $colorLinkHover: rgb(13, 97, 110);
      font-size: 18px;
      font-weight: 600;
      padding-bottom: 30px;
+ }
+
+ .privateRow{
+     padding-left: 5px;
  }
 
 
@@ -136,15 +180,27 @@ $colorLinkHover: rgb(13, 97, 110);
 .waiting{
     font-weight: 400;
     color: white;
-    padding: 5px;
+    padding-left: 9px;
+    padding-right: 9px;
+    padding-bottom: 6px;
+    padding-top: 6px;
     border-radius: 3px;
-    background-color: rgb(100, 100, 100);
+    background-color: $labelWaiting;
+    cursor: pointer;
+}
+
+.waiting:hover{
+    background-color: $labelHover;
+    cursor: pointer;
 }
 
 .sussessFind{
     font-weight: 400;
     color: white;
-    padding: 5px;
+    padding-left: 9px;
+    padding-right: 9px;
+    padding-bottom: 6px;
+    padding-top: 6px;
     border-radius: 3px;
     background-color: rgb(77, 174, 74);
 }
@@ -152,9 +208,33 @@ $colorLinkHover: rgb(13, 97, 110);
 .faildFind{
     font-weight: 400;
     color: white;
-    padding: 5px;
+    padding-left: 9px;
+    padding-right: 9px;
+    padding-bottom: 6px;
+    padding-top: 6px;
     border-radius: 3px;
     background-color: rgb(236, 70, 73);
+}
+
+.transactionFind{
+    font-weight: 400;
+    color: white;
+    padding-left: 9px;
+    padding-right: 9px;
+    padding-bottom: 6px;
+    padding-top: 6px;
+    border-radius: 3px;
+    background-color: rgb(10, 97, 255);
+}
+
+.transactionFind:hover{
+    background-color: $labelHover;
+    cursor: pointer;
+}
+
+.faildFind:hover{
+    background-color: $labelHover;
+    cursor: pointer;
 }
 
 .colorHover:hover{
@@ -180,13 +260,35 @@ $colorLinkHover: rgb(13, 97, 110);
     padding-left: 20px;
 }
 
+.clickLabel{
+    padding-left: 20px;
+    font-size: 40px;
+    margin-bottom: 0px;
+    color: white;
+}
+
+.clickTextLabel{
+    padding-left: 5px;
+    font-size: 20px;
+}
+
+.transactionLabel{
+    padding-left: 10px;
+}
+
+.transactionLabelText{
+    padding-left: 5px;
+    font-size: 20px;
+   padding-right: 10px;
+}
+
 .walletFind{
     cursor: pointer;
     font-weight: 400;
     color: white;
     padding: 3px;
     border-radius: 3px;
-    background-color: rgb(219, 147, 58);
+    background-color: #9e9e9e,;
 }
 
 .logoImg{
@@ -194,4 +296,400 @@ $colorLinkHover: rgb(13, 97, 110);
     height: 50px;
     float: left;
 }
+
+.linkTable{
+    color: white;
+    text-decoration: none !important;
+}
+
+.linkTable:visited{
+    color: white;
+    text-decoration: none !important;
+}
+
+.linkTable:hover{
+    color: white;
+    text-decoration: none !important;
+}
+
+.linkTable:active{
+    color: white;
+    text-decoration: none !important;
+}
+
+.FAQ{
+    display: inline;
+    color: black;
+    border-radius: 5px;
+    font-size: 18px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: $basicColor;
+}
+
+.FAQ:link{
+    text-decoration: none !important;
+    color:black;
+}
+
+.FAQ:visited{
+    text-decoration: none;
+    color:black;
+}
+
+body, 
+html,
+.app {
+  position: relative;
+  min-height: 84.5vh;   
+  background-color: $secondColor;
+}
+
+.FAQ:hover{
+    text-decoration: none;
+    color:white;
+    background-color: rgb(46, 166, 24);
+}
+
+
+.FAQActive{
+    text-decoration: none;
+    color:white !important;
+    background-color: rgb(46, 166, 24);
+}
+
+.basicPage{
+    display: inline;
+    color: black;
+    border-radius: 5px;
+    font-size: 18px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: $basicColor;
+}
+
+.basicPage:link{
+    text-decoration: none !important;
+    color:black;
+}
+
+.basicPage:visited{
+    text-decoration: none;
+    color:black;
+}
+
+.basicPage:hover{
+    text-decoration: none;
+    color:white;
+    background-color: $labelHover;
+}
+
+.basicPage:active{
+    text-decoration: none;
+    color:white;
+    background-color: $basicColor;
+}
+
+.UsedAdress{
+    display: inline;
+    margin-left: 3px;
+    margin-right: 3px;
+    color: black;
+    border-radius: 5px;
+    font-size: 18px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: $basicColor;
+}
+
+.UsedAdress:link{
+    text-decoration: none !important;
+}
+
+.UsedAdress:visited{
+    text-decoration: none !important;
+}
+
+.UsedAdress:hover{
+    text-decoration: none !important;
+    color:white;
+    background-color: rgb(10, 97, 255);
+}
+
+.UsedAdressActive{
+    text-decoration: none;
+    color:white !important;
+    background-color: rgb(10, 97, 255);
+}
+
+
+.linkSpace{
+    background-color: $secondColor;
+}
+
+.pages{
+    padding-top: 27px;
+}
+
+.Previous{
+  float: left;
+  background-color: white;
+  padding: 10px;
+  border-radius: 15px;
+  text-decoration: none !important;
+}
+
+.Previous:hover{
+    background-color: $basicColor;
+}
+
+.Next{
+    float: right;
+    background-color: white;
+    padding: 10px;
+    border-radius: 15px;
+    text-decoration: none !important;
+}
+
+.Next:hover{
+    background-color: $basicColor;
+}
+
+.Random{
+    background-color: $colorLink;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    color: white;
+    border-radius: 7px;
+    text-decoration: none !important;
+}
+
+.Random:link{
+    background-color: $colorLink;
+    color:white;
+}
+
+.Random:hover{
+    background-color: rgb(20, 138, 156);
+    color:white;
+}
+
+
+.headerFixed{
+    position: fixed;
+    top: 0px;
+    opacity: 0.9;
+    left: -10px;
+    background-color: $labelWaiting;
+    border-radius: 10px;
+    animation: linear 1;
+    animation-name: run;
+    animation-duration: 1s;
+}
+  
+@keyframes run {
+    0% { left: -200px;}
+    50% {left:10px;}
+    100%{ left : -10px;}
+}
+
+.headerDisapear{
+    position: fixed;
+    top: 0px;
+    opacity: 0.9;
+    background-color: $labelWaiting;
+    left: -10px;
+    border-radius: 10px;
+    animation: linear 1;
+    animation-name: disapear;
+    animation-duration: 0.5s;
+}
+  
+@keyframes disapear {
+    0% { opacity: 1}
+    100%{ opacity: 0}
+}
+
+.mobileDisplay{
+    overflow-x:auto;
+}
+
+.oneLine{
+    display: inline;
+}
+
+.paddingLeftRow{
+    padding-left: 15px;
+}
+
+.paddingForAchievement{
+    padding-bottom: 30px;
+}
+
+.usedAdressMobile{
+    display: none !important;
+}
+
+.faqMobile{
+    display: none !important;
+}
+
+.styleForButtonAdress{
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+    margin-top: 3px !important;
+    margin-bottom: 3px !important;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+
+    .paddingForFAQ{
+        padding: 0px !important;
+    }
+
+    .usedAdressMobile{
+        display: inline !important;
+    }
+
+    .faqMobile{
+        display: inline !important;
+    }
+
+    .FAQ{
+        display: none;
+    }
+
+    .UsedAdress{
+        display: none;
+    }
+
+    .basicPage{
+        display: none;
+    }
+
+    .transactionFind:hover{
+        background-color: $labelWaiting;
+        cursor: pointer;
+    }
+
+    .waiting:hover{
+        background-color: $labelWaiting;
+        cursor: pointer;
+    }
+
+    .faildFind:hover{
+        background-color: $labelWaiting;
+        cursor: pointer;
+    }
+
+    .paddingRightRow{
+        padding-right: 10px;
+    }
+
+    .click{
+        padding-top: 0px;
+        font-size: 50px;
+        margin-bottom: 0px;
+    }
+    
+    .clickText{
+        padding-left: 5px;
+        font-size: 20px;
+    }
+
+    .oneLine{
+        display: block;
+    }
+
+    .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+        border: none !important;
+    }
+
+    .clickLabel{
+        padding-left: 20px;
+        font-size: 25px;
+        margin-bottom: 0px;
+        color: white;
+    }
+    
+    .clickTextLabel{
+        padding-left: 5px;
+        font-size: 12px;
+    }
+    
+    .transactionLabel{
+        padding-left: 10px;
+    }
+    
+    .transactionLabelText{
+        padding-left: 5px;
+        font-size: 12px;
+       padding-right: 10px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 812px) {
+
+    .usedAdressMobile{
+        display: none !important;
+    }
+    
+    .faqMobile{
+        display: none !important;
+    }
+
+    .FAQ{
+        display: inline;
+    }
+
+    .UsedAdress{
+        display: inline;
+    }
+
+    .basicPage{
+        display: inline;
+    }
+
+    .transactionFind:hover{
+        background-color: $labelWaiting;
+        cursor: pointer;
+    }
+
+    .waiting:hover{
+        background-color: $labelWaiting;
+        cursor: pointer;
+    }
+
+    .faildFind:hover{
+        background-color: $labelWaiting;
+        cursor: pointer;
+    }
+
+    .paddingRightRow{
+        padding-right: 10px;
+    }
+
+    .click{
+        padding-top: 0px;
+        font-size: 55px;
+        margin-bottom: 0px;
+    }
+    
+    .clickText{
+        padding-left: 5px;
+        font-size: 25px;
+    }
+
+}
+
+
+
 
